@@ -1,7 +1,9 @@
 sudo apt update
 sudo apt upgrade
 
-python -m venv --system-site-packages env_DIYHomeAssistantClient
-source env_DIYHomeAssistantClient/bin/activate
+sudo apt-get install -y python3-smbus i2c-tools
+
+python -m venv --system-site-packages env_DIYDrone
+source env_DIYDrone/bin/activate
 
 pip install -r requirements.txt
