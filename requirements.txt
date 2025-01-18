@@ -6,8 +6,12 @@
 # Scd30 sensor
 #adafruit-circuitpython-scd30
 
-# BMP180
-#Adafruit-BMP
+# BMP280
+adafruit-circuitpython-bmp280
+
+
+# IMU MPU6050
+adafruit-circuitpython-mpu6050
 
 # pca9685
 adafruit-circuitpython-pca9685
