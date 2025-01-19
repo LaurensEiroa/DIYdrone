@@ -27,8 +27,8 @@ class PWM:
         for motor in self.motors:
             self.pca.channels[motor.get_channel()].duty_cycle = int(motor.get_duty_cycle() * 65535 / 100)
 
-if __name__=="__main__":
-    motor = [BLMotor(channel=0,frequency=50)]
+def test():
+    motor = [BLMotor(channel=4,frequency=50)]
     pwm = PWM(motors=motor)
 
     motor[0].set_duty_cycle(10)
@@ -41,3 +41,6 @@ if __name__=="__main__":
     motor[0].set_duty_cycle(0)
     pwm.set_pwm_duty_cycle()
     time.sleep(5)
+
+if __name__=="__main__":
+    test
