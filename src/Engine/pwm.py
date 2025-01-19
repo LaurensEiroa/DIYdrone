@@ -30,11 +30,12 @@ def test():
     print("pwm set 10")
     motor[0].set_duty_cycle(10)
     pwm.set_pwm_duty_cycle() 
+    time.sleep(15)
 
     print("pwm set 20")
     motor[0].set_duty_cycle(20)
     pwm.set_pwm_duty_cycle()
-    time.sleep(5)
+    time.sleep(15)
 
     print("pwm set 0")
     motor[0].set_duty_cycle(0)
