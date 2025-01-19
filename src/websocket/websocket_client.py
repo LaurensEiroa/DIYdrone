@@ -49,6 +49,9 @@ class Client:
                 return f"{acceleration} - {gyro} - {temperature}"
             
 
-if __name__ == "__main__":
+def run():
     cli = Client()
     asyncio.run(cli.start_server())
+
+if __name__ == "__main__":
+    run()
