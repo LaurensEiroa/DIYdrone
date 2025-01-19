@@ -14,13 +14,8 @@ class PWM:
 
         self.motors = motors
 
-        self.set_pwm_frequency()
+        self.pca.frequency = motors[0].get_frequency()
         pass
-
-    # Function to set the PWM frequency for a specific channel
-    def set_pwm_frequency(self):
-        for motor in self.motors:
-            self.pca.channels[motor.get_channel()].frequency = motor.get_frequency()
 
     # Function to set the PWM duty cycle for a specific channel
     def set_pwm_duty_cycle(self):
@@ -47,4 +42,4 @@ def test():
     time.sleep(5)
 
 if __name__=="__main__":
-    test
+    test()
