@@ -1,3 +1,4 @@
+git pull
 
 source env_DIYDrone/bin/activate
 

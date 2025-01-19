@@ -24,7 +24,7 @@ class PWM:
 
 def test():
     print("loading motor")
-    motor = [BLMotor(channel=4,frequency=50)]
+    motor = [BLMotor(channel=0,frequency=50)]
     print("motor_created")
     pwm = PWM(motors=motor)
     print("pwm set 10")
