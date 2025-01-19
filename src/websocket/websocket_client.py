@@ -29,18 +29,18 @@ class Client:
             await websocket.send(f"{answer}")
 
     async def message_processor(self, message):
-        print("massage to process")
+        print(f"massage to process: {message}")
         match message:
             # Sensor Readings
             case "read_bmp":
                 print("read_bmp_scope")
                 temperature, pressure, altitude = read_bmp()
-                return f"{temperature} - {pressure} - {altitude}"
+                return f"{temperature} / {pressure} /{altitude}"
             
             case "read_mpu":
                 print("read_mpu_scope")
                 acceleration, gyro, temperature = read_mpu()
-                return f"{acceleration} - {gyro} - {temperature}"
+                return f"{acceleration} / {gyro} / {temperature}"
             
             case _:
                 print("Non valid message")
