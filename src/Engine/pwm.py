@@ -2,7 +2,7 @@ import time
 import board
 import busio
 from adafruit_pca9685 import PCA9685
-from scr.Engine.motor import BLMotor
+from src.Engine.motor import BLMotor
 
 class PWM:
     def __init__(self,motors):
