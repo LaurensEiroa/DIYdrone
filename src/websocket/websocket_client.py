@@ -2,9 +2,9 @@ import asyncio
 import websockets
 
 
-from scr.picamera.picamera import Camera
-from scr.sensors.mpu6050.mpu6050 import read_rata as read_mpu
-from scr.sensors.bmp280.bmp280 import read_rata as read_bmp
+from src.picamera.picamera import Camera
+from src.sensors.mpu6050.mpu6050 import read_rata as read_mpu
+from src.sensors.bmp280.bmp280 import read_rata as read_bmp
 
 import sys
 import os
