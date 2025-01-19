@@ -25,19 +25,25 @@ class Client:
         async for message in websocket:
             print(f"Received message: {message}")
             answer = await self.message_processor(message)
+            print(f"answer: {answer}")
             await websocket.send(f"{answer}")
 
     async def message_processor(self, message):
+        print("massage to process")
         match message:
             # Sensor Readings
             case "read_bmp":
+                print("read_bmp_scope")
                 temperature, pressure, altitude = read_bmp()
                 return f"{temperature} - {pressure} - {altitude}"
             
             case "read_mpu":
+                print("read_mpu_scope")
                 acceleration, gyro, temperature = read_mpu()
                 return f"{acceleration} - {gyro} - {temperature}"
             
+            case _:
+                print("Non valid message")
 
 def run():
     cli = Client()
