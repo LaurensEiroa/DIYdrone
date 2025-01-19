@@ -1,15 +1,21 @@
 import asyncio
 import websockets
 
+try:
+    from config import Config
+    from src.picamera.picamera import Camera
+    from src.sensors.mpu6050.mpu6050 import read_rata as read_mpu
+    from src.sensors.bmp280.bmp280 import read_rata as read_bmp
+except ModuleNotFoundError:
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from config import Config
+    from src.picamera.picamera import Camera
+    from src.sensors.mpu6050.mpu6050 import read_rata as read_mpu
+    from src.sensors.bmp280.bmp280 import read_rata as read_bmp
 
-from src.picamera.picamera import Camera
-from src.sensors.mpu6050.mpu6050 import read_rata as read_mpu
-from src.sensors.bmp280.bmp280 import read_rata as read_bmp
 
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config import Config
 class Client:
     def __init__(self, address="0.0.0.0", port=Config.WEBSOCKET_PORT):
         self.address = address
