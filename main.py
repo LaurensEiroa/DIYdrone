@@ -5,4 +5,5 @@ from src.Engine.pwm import test
 if __name__=="__main__":
 
     #run()
+    print("starting test")
     test()
