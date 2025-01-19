@@ -1,20 +1,19 @@
 import asyncio
 import websockets
+from config import Config
 
-from scr.utils.sensors.sht31d.sht31d import read_data
-from scr.utils.devices.relay.mechanical_relay import Relay
-from scr.utils.picamera.picamera import Camera
+from scr.picamera.picamera import Camera
+from scr.sensors.mpu6050.mpu6050 import read_rata as read_mpu
+from scr.sensors.bmp280.bmp280 import read_rata as read_bmp
 
 class Client:
-    def __init__(self, address="0.0.0.0", port="8080"):
+    def __init__(self, address="0.0.0.0", port=Config.WEBSOCKET_PORT):
         self.address = address
         self.port = port
 
         # TODO
-        self.lamp = Relay(GPIO_PIN=18)
-        self.cam = Camera()
+        # self.cam = Camera()
 
-        self.stream_task = None
         
     async def start_server(self):
         server = await websockets.serve(lambda ws: self.handler(ws), self.address, self.port)
@@ -26,42 +25,19 @@ class Client:
         async for message in websocket:
             print(f"Received message: {message}")
             answer = await self.message_processor(message)
-            await websocket.send(f"Echo: {answer}")
+            await websocket.send(f"{answer}")
 
     async def message_processor(self, message):
         match message:
             # Sensor Readings
-            case "read_sht31d":
-                temp, hum = read_data()
-                return f"Temperature: {temp} - Humidity: {hum}"
+            case "read_bmp":
+                temperature, pressure, altitude = read_bmp()
+                return f"{temperature} - {pressure} - {altitude}"
             
-            # Light Control
-            case "turn_on_relay":
-                self.lamp.turn_on_relay()
-                return "relay_on"
-            case "turn_off_relay":
-                self.lamp.turn_off_relay()
-                return "relay_off"
-            case "toggle_relay":
-                self.lamp.toggle_relay()
-                return "relay_toggled"
+            case "read_mpu":
+                acceleration, gyro, temperature = read_mpu()
+                return f"{acceleration} - {gyro} - {temperature}"
             
-            # Stream Control
-            case "start_http_stream":
-                self.cam.start_streaming()
-                self.stream_task = asyncio.create_task(self.cam.stream_http())
-                return "streaming started"
-            case "stop_http_stream":
-                if self.cam.streaming:
-                    self.cam.stop_streaming()
-                if self.stream_task:
-                    self.stream_task.cancel()
-                    self.stream_task = None
-                return "stream stopped"
-            case "start_udp_stream":
-                pass
-            case "stop_udp_stream":
-                pass
 
 if __name__ == "__main__":
     cli = Client()
