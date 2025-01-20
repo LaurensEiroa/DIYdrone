@@ -16,9 +16,9 @@ def test():
     while True:
         acceleration, gyro, temperature = read_rata()
         
-        print(f"Accel : ({acceleration[0]:.2f} i, {acceleration[1]:.2f} j, {acceleration[2]:.2f} k) m/s^2")
+        #print(f"Accel : ({acceleration[0]:.2f} i, {acceleration[1]:.2f} j, {acceleration[2]:.2f} k) m/s^2")
         print(f"Gyro : ({gyro[0]:.2f} i, {gyro[1]:.2f} j, {gyro[2]:.2f} k) rad/s")
-        print(f"Temp: {temperature:.2f} C")
+        #print(f"Temp: {temperature:.2f} C")
         time.sleep(1)
 
 if __name__=="__main__":
