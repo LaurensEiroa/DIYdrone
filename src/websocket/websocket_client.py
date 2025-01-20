@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 
+
 from config import Config
 from src.picamera.picamera import Camera
 from src.sensors.bmp280.bmp280 import read_data as read_bmp
@@ -30,19 +31,18 @@ class Client:
 
     async def message_processor(self, message):
         print(f"massage to process: {message}")
-        match message:
             # Sensor Readings
-            case "read_bmp":
+        if message == "read_bmp":
                 print("read_bmp_scope")
                 temperature, pressure, altitude = read_bmp()
                 return f"{temperature}/{pressure}/{altitude}"
             
-            case "read_mpu":
+        if message == "read_mpu":
                 print("read_mpu_scope")
                 acceleration, gyro, temperature = read_mpu()
                 return f"{acceleration}/{gyro}/{temperature}"
             
-            case _:
+        else:
                 print("Non valid message")
 
 def run():
