@@ -8,7 +8,7 @@ from config import Config
 
 
 def data_to_string(data):
-    return "//".join(data)
+    return "//".join(map(str,data))
 
 
 async def run():
