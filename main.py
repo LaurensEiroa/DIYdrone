@@ -15,7 +15,7 @@ async def run():
     camera = Camera()
     
     sender = 'piZero4'  # Replace with your sender IP address
-    receiver = 'ubuntu_laptop'  # Replace with your receiver IP address
+    receiver = 'windows_computer'  # Replace with your receiver IP address
 
     udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
     udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
