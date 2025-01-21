@@ -14,6 +14,7 @@ class UDPSender:
         self.receiver_address = (receiver_ip, port)
 
     async def send_data(self,data,data_type="image"):
+        print(f"sending {data_type}")
         if data_type=="frame": 
             encoded, buffer = cv2.imencode('.jpg', data)
             buffer = buffer.tobytes()
@@ -31,7 +32,7 @@ async def run():
     receiver = 'ubuntu_laptop'  # Replace with your receiver IP address
 
     udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
-    udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
+    #udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
 
     cap = cv2.VideoCapture(0)
     data = "Hello from the drone!"
@@ -41,7 +42,7 @@ async def run():
             break
         data = data[::-1]
         await asyncio.gather(
-            udp_frame_sender.send_data(frame,data_type="frame"),
+            #udp_frame_sender.send_data(frame,data_type="frame"),
             udp_data_sender.send_data(data,data_type="data")
         )
     cap.release()
