@@ -18,15 +18,15 @@ async def run():
     receiver = Config.RECIEVER  # Replace with your receiver IP address
 
     udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
-    udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
+    #udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
 
     while True:
         frame = camera.get_frame()
         #a,g,t = read_data_mpu()
         data = "Hello World" #data_to_string(g)
         await asyncio.gather(
-            udp_frame_sender.send_data(frame,data_type="frame"),
-            #udp_data_sender.send_data(data,data_type="data")
+            #udp_frame_sender.send_data(frame,data_type="frame"),
+            udp_data_sender.send_data(data,data_type="data")
         )
 
 if __name__=="__main__":
