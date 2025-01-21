@@ -25,26 +25,3 @@ class UDPSender:
             self.server_socket.sendto(buffer[i:i+MAX_DGRAM], self.receiver_address)
         # Send a delimiter to indicate the end of the frame
         self.server_socket.sendto(b'END', self.receiver_address)
-
-async def run():
-    sender = 'piZero4'  # Replace with your sender IP address
-    receiver = 'windows_computer'  # Replace with your receiver IP address
-
-    udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
-    udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_FRAME_PORT)
-
-    cap = cv2.VideoCapture(0)
-    data = "Hello from the drone!"
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
-        data = data[::-1]
-        await asyncio.gather(
-            udp_frame_sender.send_data(frame, data_type="frame"),
-            udp_data_sender.send_data(data, data_type="data")
-        )
-    cap.release()
-
-if __name__ == "__main__":
-    asyncio.run(run())
