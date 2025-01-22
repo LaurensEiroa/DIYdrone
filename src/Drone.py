@@ -58,10 +58,12 @@ class Drone:
 
     def process_sensor_readings(self):
         # MPU
+        print(f"reading mpu")
         acc, gyr, t  = read_mpu()
         gyr_data_processed = self.drone_coords_to_3d_coords(gyr)
         self.update_orientation(gyr_data_processed)
-
+        
+        print(f"reading bmp")
         t, p, h = read_bmp()
         self.update_heigth(h)
         
