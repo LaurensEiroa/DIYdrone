@@ -13,7 +13,7 @@ class UDPSender:
 
         self.object = obj
 
-    async def send_data(self, data_type="image"):
+    async def send_data(self, data_type="data"):
         if data_type == "frame":
             data = self.object.get_frame()
             encoded, buffer = cv2.imencode('.jpg', data)
@@ -29,3 +29,7 @@ class UDPSender:
             self.server_socket.sendto(buffer[i:i+MAX_DGRAM], self.receiver_address)
         # Send a delimiter to indicate the end of the frame
         self.server_socket.sendto(b'END', self.receiver_address)
+
+    async def run_udp(self):
+        while True:
+            await self.send_data(data_type="data")

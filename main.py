@@ -22,7 +22,7 @@ async def run():
     
     await asyncio.gather(
             #udp_frame_sender.send_data(frame,data_type="frame"),
-            udp_data_sender.send_data(data_type="data"),
+            udp_data_sender.run_udp(),
             drone.start_drone()
         )
 

@@ -20,6 +20,7 @@ class Drone:
         self.initial_position = np.zeros((3))
         self.initial_angle = np.zeros((3))
 
+        self.initialize_sensors()
 
         self.edges = np.asarray([[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], 
                                  [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], 
@@ -116,7 +117,6 @@ class Drone:
         self.body_coordinates = self.apply_rotation(vertices)
 
     async def start_drone(self):
-        self.initialize_sensors()
         while True:
             # Set drone status
             self.process_sensor_readings()
