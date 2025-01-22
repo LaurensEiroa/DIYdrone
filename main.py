@@ -1,9 +1,7 @@
 import asyncio
 from src.coms.websocket.websocket_client import run
-from src.Engine.pwm import test as test_motor
-from src.sensors.mpu6050.mpu6050 import read_rata as read_data_mpu
-from src.picamera.picamera import Camera
 from src.coms.udp.udp_sender import UDPSender
+from src.Drone import Drone
 from config import Config
 
 
@@ -12,21 +10,20 @@ def data_to_string(data):
 
 
 async def run():
-    camera = Camera()
+
+    drone = Drone()
     
     sender = Config.SENDER  # Replace with your sender IP address
     receiver = Config.RECIEVER  # Replace with your receiver IP address
 
-    udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
-    udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
+    udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT,obj=drone)
+    #udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
 
-    while True:
-        frame = camera.get_frame()
-        #a,g,t = read_data_mpu()
-        data = "Hello World"#data_to_string(g)
-        await asyncio.gather(
-            udp_frame_sender.send_data(frame,data_type="frame"),
-            udp_data_sender.send_data(data,data_type="data")
+    
+    await asyncio.gather(
+            #udp_frame_sender.send_data(frame,data_type="frame"),
+            udp_data_sender.send_data(data_type="data"),
+            drone.start_drone()
         )
 
 if __name__=="__main__":

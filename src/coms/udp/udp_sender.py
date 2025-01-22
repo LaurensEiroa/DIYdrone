@@ -4,20 +4,24 @@ from config import Config
 import asyncio
 
 class UDPSender:
-    def __init__(self, sender_ip, receiver_ip, port):
+    def __init__(self, sender_ip, receiver_ip, port,obj):
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         self.server_socket.bind((sender_ip, port))
         self.receiver_address = (receiver_ip, port)
 
-    async def send_data(self, data, data_type="image"):
+        self.object = obj
+
+    async def send_data(self, data_type="image"):
         print(f"sending {data_type}")
         if data_type == "frame":
+            data = self.object.get_frame()
             encoded, buffer = cv2.imencode('.jpg', data)
             buffer = buffer.tobytes()
             MAX_DGRAM = Config.MAX_DGRAM_FRAME
         elif data_type == "data":
+            data = self.object.get_string_data()
             buffer = data.encode('utf-8')
             MAX_DGRAM = Config.MAX_DGRAM_DATA
         size = len(buffer)
