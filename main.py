@@ -1,8 +1,9 @@
 import asyncio
-from src.coms.websocket.websocket_client import run
 from src.coms.udp.udp_sender import UDPSender
 from src.Drone import Drone
 from config import Config
+
+from src.Engine.pwm import test as test_motor
 
 
 def data_to_string(data):
@@ -27,6 +28,11 @@ async def run():
         )
 
 if __name__=="__main__":
-    asyncio.run(run())
-
+    import time
+    print("Countdown:")
+    for i in range(10,0,-1):
+        print(i)
+        time.sleep(1)
+    #asyncio.run(run())
+    test_motor()
 
