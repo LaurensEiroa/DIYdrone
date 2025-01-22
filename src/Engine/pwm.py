@@ -28,17 +28,17 @@ def test():
     motor = [BLMotor(channel=i,frequency=60) for i in range(motors_number)]
     print("motor_created")
     pwm = PWM(motors=motor)
-    print("pwm set 100")
+    print("pwm set 0")
     for i in range(motors_number):
-        motor[i].set_duty_cycle(100)
+        motor[i].set_duty_cycle(0)
     pwm.set_pwm_duty_cycle() 
-    time.sleep(90)
+    time.sleep(10)
 
-    print("pwm set 80")
+    print("pwm set 50")
     for i in range(motors_number):
-        motor[i].set_duty_cycle(80)
+        motor[i].set_duty_cycle(50)
     pwm.set_pwm_duty_cycle()
-    time.sleep(90)
+    time.sleep(10)
 
     print("pwm set 100")
     for i in range(motors_number):
