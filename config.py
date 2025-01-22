@@ -12,7 +12,8 @@ class Config:
        UDP_DATA_PORT = 8010 
        UDP_FRAME_PORT = 8020
        WEBSOCKET_PORT = 8000
-       MAX_DGRAM_FRAME = 2**15  # 32,768 bytes for frames
+       
+       MAX_DGRAM_FRAME = 2**16  # 32,768 bytes for frames
        MAX_DGRAM_DATA = 1024  # 1,024 bytes for data
 
        SENDER = "piZero4"
