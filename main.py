@@ -16,8 +16,8 @@ async def run():
     sender = Config.SENDER  # Replace with your sender IP address
     receiver = Config.RECIEVER  # Replace with your receiver IP address
 
-    udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT,obj=drone)
-    udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT)
+    udp_data_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT, obj=drone)
+    udp_frame_sender = UDPSender(sender_ip=Config.IPs[sender], receiver_ip=Config.IPs[receiver], port=Config.UDP_DATA_PORT, obj=drone)
 
     
     await asyncio.gather(
