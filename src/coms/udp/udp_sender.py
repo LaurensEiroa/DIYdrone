@@ -30,8 +30,8 @@ class UDPSender:
         # Send a delimiter to indicate the end of the frame
         self.server_socket.sendto(b'END', self.receiver_address)
 
-    async def run_udp(self):
+    async def run_udp(self,data_type="data"):
         print("running udp loop")
         while True:
-            await self.send_data(data_type="data")
+            await self.send_data(data_type=data_type)
             await asyncio.sleep(0)
