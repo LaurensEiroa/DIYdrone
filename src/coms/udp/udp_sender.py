@@ -21,7 +21,7 @@ class UDPSender:
             buffer = buffer.tobytes()
             MAX_DGRAM = Config.MAX_DGRAM_FRAME
         elif data_type == "data":
-            data = self.object.get_string_data()
+            data = self.object.get_data()
             buffer = data.encode('utf-8')
             MAX_DGRAM = Config.MAX_DGRAM_DATA
         size = len(buffer)
