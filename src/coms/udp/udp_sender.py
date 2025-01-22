@@ -31,5 +31,6 @@ class UDPSender:
         self.server_socket.sendto(b'END', self.receiver_address)
 
     async def run_udp(self):
+        print("running udp loop")
         while True:
             await self.send_data(data_type="data")
