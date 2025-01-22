@@ -44,7 +44,14 @@ def test():
     for i in range(motors_number):
         motor[i].set_duty_cycle(100)
     pwm.set_pwm_duty_cycle()
-    time.sleep(90)
+    time.sleep(10)
+
+    
+    print("pwm set 0")
+    for i in range(motors_number):
+        motor[i].set_duty_cycle(0)
+    pwm.set_pwm_duty_cycle() 
+    time.sleep(10)
 
 if __name__=="__main__":
     test()
