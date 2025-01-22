@@ -24,23 +24,26 @@ class PWM:
 
 def test():
     print("loading motor")
-    motor = [BLMotor(channel=0,frequency=50)]
+    motor = [BLMotor(channel=0,frequency=50),BLMotor(channel=1,frequency=50)]
     print("motor_created")
     pwm = PWM(motors=motor)
     print("pwm set 10")
-    motor[0].set_duty_cycle(10)
+    motor[0].set_duty_cycle(100)
+    motor[1].set_duty_cycle(100)
     pwm.set_pwm_duty_cycle() 
-    time.sleep(15)
+    time.sleep(90)
 
     print("pwm set 20")
-    motor[0].set_duty_cycle(20)
+    motor[0].set_duty_cycle(80)
+    motor[1].set_duty_cycle(80)
     pwm.set_pwm_duty_cycle()
-    time.sleep(15)
+    time.sleep(90)
 
     print("pwm set 0")
-    motor[0].set_duty_cycle(0)
+    motor[0].set_duty_cycle(100)
+    motor[1].set_duty_cycle(100)
     pwm.set_pwm_duty_cycle()
-    time.sleep(5)
+    time.sleep(90)
 
 if __name__=="__main__":
     test()
