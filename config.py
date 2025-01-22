@@ -17,4 +17,4 @@ class Config:
        MAX_DGRAM_DATA = 2**16  # 1,024 bytes for data
 
        SENDER = "piZero4"
-       RECIEVER = "windows_computer"
+       RECIEVER = "ubuntu_laptop"

@@ -12,7 +12,7 @@ class Drone:
     def __init__(self,length_width_height = [90,60,20]):
         self.length_width_height = np.asarray(length_width_height)
 
-        self.camera = Camera()
+        self.camera = Camera(resolution=(307,173))
         self.frame = self.set_frame()
 
         self.position = np.zeros((3))
