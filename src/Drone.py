@@ -48,7 +48,9 @@ class Drone:
         return self.frame
     
     def get_data(self):
-        text = f"{'//'.join(self.angle)}$$${'//'.join(self.position)}"
+        text = f"{'//'.join(map(str, self.angle))}$$${'//'.join(map(str, self.position))}"
+        return text
+
 
     def process_sensor_readings(self):
         # MPU
