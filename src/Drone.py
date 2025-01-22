@@ -6,7 +6,7 @@ from src.picamera.picamera import Camera
 from src.sensors.mpu6050.mpu6050 import read_rata as read_mpu
 from src.sensors.bmp280.bmp280 import read_data as read_bmp
 
-
+import asyncio
 
 class Drone:
     def __init__(self,length_width_height = [90,60,20]):
@@ -128,6 +128,7 @@ class Drone:
 
             # Set drone view
             self.set_frame()
+            await asyncio.sleep(0)
 
 
 if __name__=="__main__":

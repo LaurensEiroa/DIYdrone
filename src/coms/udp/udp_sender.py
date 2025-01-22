@@ -34,3 +34,4 @@ class UDPSender:
         print("running udp loop")
         while True:
             await self.send_data(data_type="data")
+            await asyncio.sleep(0)
