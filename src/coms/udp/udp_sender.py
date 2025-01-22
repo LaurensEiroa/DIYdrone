@@ -24,7 +24,7 @@ class UDPSender:
             buffer = data.encode('utf-8')
             MAX_DGRAM = Config.MAX_DGRAM_DATA
         size = len(buffer)
-        print(f"sending {data_type} buffer length: {size}\t\t{data}")
+        #print(f"sending {data_type} buffer length: {size}\t\t{data}")
         for i in range(0, size, MAX_DGRAM):
             self.server_socket.sendto(buffer[i:i+MAX_DGRAM], self.receiver_address)
         # Send a delimiter to indicate the end of the frame
