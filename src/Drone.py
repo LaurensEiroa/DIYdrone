@@ -28,6 +28,7 @@ class Drone:
         self.body_coordinates = self.set_body_coordinates()
 
     def initialize_sensors(self,steps = 20):
+        print("initializing sensors")
         initial_angle = np.zeros((steps,3))
         initial_height = np.zeros(steps)
         for i in range(steps):
@@ -37,8 +38,10 @@ class Drone:
 
             t, p, h = read_bmp()
             initial_height[i] = h
+
         self.initial_angle = np.mean(initial_angle,axis=0)
-        self.initial_position[3] = np.mean(initial_height)
+        self.initial_position[2] = np.mean(initial_height)
+        print(f"initial angle {self.initial_angle}\t initial position {self.initial_position}")
 
 
     def set_frame(self):
