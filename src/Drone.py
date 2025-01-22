@@ -120,6 +120,7 @@ class Drone:
         self.body_coordinates = self.apply_rotation(vertices)
 
     async def start_drone(self):
+        print("starting loop drone")
         while True:
             # Set drone status
             self.process_sensor_readings()
