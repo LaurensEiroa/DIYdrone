@@ -71,6 +71,7 @@ class Drone:
     
     def update_orientation(self,rotation_3d_frame):
         self.angle += rotation_3d_frame-self.initial_angle # TODO += or = ??
+        print(f"new angle {self.angle}")
 
     def update_heigth(self,h):
         self.position[2] = h-self.initial_position[2]
@@ -120,7 +121,7 @@ class Drone:
         while True:
             # Set drone status
             self.process_sensor_readings()
-            self.set_body_coordinates()
+            #self.set_body_coordinates()
 
             # Set drone view
             self.set_frame()
