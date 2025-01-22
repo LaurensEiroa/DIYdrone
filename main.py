@@ -21,9 +21,9 @@ async def run():
 
     
     await asyncio.gather(
+            drone.start_drone(),
             udp_data_sender.run_udp("data"),
             udp_frame_sender.run_udp("frame"),
-            drone.start_drone(),
         )
 
 if __name__=="__main__":
