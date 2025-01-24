@@ -17,6 +17,8 @@ def read_samples(samples=1000):
     t0 = time.time()
     for i in _samples:
         acceleration.append(mpu.acceleration)
+        print(np.asarray(acceleration[0]))
+        break
         if time.time() - t0-i*0.001>=0.001:
             continue
         else:
