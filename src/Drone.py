@@ -59,7 +59,7 @@ class Drone:
     def process_sensor_readings(self):
         # MPU
         #print(f"reading mpu")
-        acc, gyr, t  = read_mpu()
+        acc, gyr, t  = read_mpu(angle=True)
         gyr_data_processed = self.drone_coords_to_3d_coords(gyr)
         self.update_orientation(gyr_data_processed)
         
@@ -72,7 +72,7 @@ class Drone:
         return np.asarray([-gyro_readings[1],gyro_readings[0],gyro_readings[2]])
     
     def update_orientation(self,rotation_3d_frame):
-        self.angle = rotation_3d_frame-self.initial_angle # TODO += or = ??
+        self.angle += rotation_3d_frame-self.initial_angle # TODO += or = ??
         #print(f"new angle {self.angle}")
 
     def update_heigth(self,h):

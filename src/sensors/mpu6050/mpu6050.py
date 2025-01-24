@@ -3,12 +3,22 @@ import board
 import busio
 import adafruit_mpu6050
 
-def read_rata():
+def read_rata(angle=False):
     i2c = busio.I2C(board.SCL, board.SDA)
     mpu = adafruit_mpu6050.MPU6050(i2c)
-
+    if angle:
+        t0 = time.time()
+        acceleration = mpu.acceleration
+        t1 = time.time()
+        gyro = mpu.gyro
+        t2 = time.time()
+        temperature = mpu.temperature
+        return acceleration*(t1-t0),gyro*(t2-t1),temperature
+    t0 = time.time()
     acceleration = mpu.acceleration
+    t1 = time.time()
     gyro = mpu.gyro
+    t2 = time.time()
     temperature = mpu.temperature
     return acceleration,gyro,temperature
 
