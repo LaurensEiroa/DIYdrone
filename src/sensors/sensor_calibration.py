@@ -11,15 +11,15 @@ def read_samples(samples=1000):
     i2c = busio.I2C(board.SCL, board.SDA)
     mpu = adafruit_mpu6050.MPU6050(i2c)
     _samples = range(samples)
-    acceleration = []
+    acceleration = np.zeros((samples,3))
     hz = 1/samples
     print(f"start: {time.time()}")
     t0 = time.time()
     for i in _samples:
-        acceleration.append(mpu.acceleration)
-        print(np.asarray(acceleration[0]))
-        break
+        acceleration[i,:] = np.asarray(mpu.acceleration)
         if time.time() - t0-i*0.001>=0.001:
+            print(time.time() - t0-i*0.001)
+            break
             continue
         else:
             print("once")
