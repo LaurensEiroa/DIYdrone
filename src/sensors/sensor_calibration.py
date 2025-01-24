@@ -17,7 +17,7 @@ def read_samples(samples=1000):
     for _ in _samples:
         t0 = time.time()
         acceleration.append(mpu.acceleration)
-        time.sleep(hz-time.time()+t0)
+        #time.sleep(hz-time.time()+t0)
     
     print(f"end: {time.time()}")
     np.savetxt("data/accelerometer_data.txt",np.asanyarray(acceleration))
