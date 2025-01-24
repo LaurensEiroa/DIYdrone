@@ -73,7 +73,7 @@ class Drone:
     
     def update_orientation(self,rotation_3d_frame):
         self.angle += rotation_3d_frame-self.initial_angle # TODO += or = ??
-        #print(f"new angle {self.angle}")
+        print(f"new update {rotation_3d_frame-self.initial_angle}")
 
     def update_heigth(self,h):
         self.position[2] = h-self.initial_position[2]
