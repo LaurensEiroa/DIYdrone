@@ -13,20 +13,12 @@ def read_samples(samples=1000):
     _samples = range(samples)
     acceleration = np.zeros((samples,3))
     hz = 1/samples
-    print(f"start: {time.time()}")
     t0 = time.time()
     for i in _samples:
         acceleration[i,:] = np.asarray(mpu.acceleration)
-        if time.time() - t0-i*0.001>=0.001:
-            print(time.time() - t0-i*0.001)
-            break
-            continue
-        else:
-            print("once")
-            time.sleep(time.time() - t0-i*0.001)
-    
-    print(f"end: {time.time()}")
-    np.savetxt("data/accelerometer_data.txt",np.asanyarray(acceleration))
+    tf = time.time()
+    print(f"total time: {tf-t0}, frequency: {(tf-t0)/samples}")
+    np.savetxt("data/accelerometer_data.txt",acceleration)
 
 if __name__=="__main__":
     read_samples()
