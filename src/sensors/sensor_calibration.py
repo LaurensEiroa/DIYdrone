@@ -14,15 +14,14 @@ def read_samples(samples=1000):
     acceleration = []
     hz = 1/samples
     print(f"start: {time.time()}")
-    for _ in _samples:
-        t0 = time.time()
+    t0 = time.time()
+    for i in _samples:
         acceleration.append(mpu.acceleration)
-        delta_t = time.time()-t0
-        if delta_t>=1/1000:
+        if time.time() - t0-i*0.001>=0.001:
             continue
         else:
             print("once")
-            time.sleep(hz-delta_t)
+            time.sleep(time.time() - t0-i*0.001)
     
     print(f"end: {time.time()}")
     np.savetxt("data/accelerometer_data.txt",np.asanyarray(acceleration))
