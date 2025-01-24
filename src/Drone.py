@@ -73,9 +73,10 @@ class Drone:
     
     def update_orientation(self,rotation_3d_frame):
         update = rotation_3d_frame-self.initial_angle
-        print(f"new update {update}")
-        if np.abs(update)<0.2:
-            update = 0
+        print(f"update {update}")
+        cond = np.abs(update)<0.2
+        if cond:
+            update[cond] = 0
         self.angle += update # TODO += or = ??
 
     def update_heigth(self,h):
