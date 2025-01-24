@@ -75,7 +75,7 @@ class Drone:
         update = rotation_3d_frame-self.initial_angle
         print(f"update {update}")
         cond = np.abs(update)<0.2
-        if cond:
+        if np.any(cond):
             update[cond] = 0
         self.angle += update # TODO += or = ??
 
