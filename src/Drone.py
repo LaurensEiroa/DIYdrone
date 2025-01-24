@@ -33,7 +33,7 @@ class Drone:
         initial_angle = np.zeros((steps,3))
         initial_height = np.zeros(steps)
         for i in range(steps):
-            acc, gyr, t  = read_mpu()
+            acc, gyr, t  = read_mpu(angle=True)
             gyr_data_processed = self.drone_coords_to_3d_coords(gyr)
             initial_angle[i,:] = gyr_data_processed
 
