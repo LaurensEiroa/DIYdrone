@@ -6,7 +6,7 @@ class Camera:
     def __init__(self,resolution=(180,101), format='XRGB8888'):
         # Initialize Picamera2
         self.picam2 = Picamera2()
-        self.picam2.configure(self.picam2.create_video_configuration(main={"format": format, "size": resolution})), transform=Transform(rotation=90)
+        self.picam2.configure(self.picam2.create_video_configuration(main={"format": format, "size": resolution}, transform=Transform(rotation=90)))
         self.picam2.start()
 
     def get_frame(self):
