@@ -2,10 +2,10 @@ import cv2
 from picamera2 import Picamera2
 
 class Camera:
-    def __init__(self,resolution=(320, 280), format='XRGB8888'):
+    def __init__(self,resolution=(180,101), format='XRGB8888'):
         # Initialize Picamera2
         self.picam2 = Picamera2()
-        self.picam2.configure(self.picam2.create_video_configuration(main={"format": format, "size": resolution}))
+        self.picam2.configure(self.picam2.create_video_configuration(main={"format": format, "size": resolution, "transform": 3}))
         self.picam2.start()
 
     def get_frame(self):
