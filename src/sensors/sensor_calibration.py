@@ -18,7 +18,7 @@ def read_samples(samples=1000):
         acceleration.append(mpu.acceleration)
     tf = time.time()
     print(f"total time: {tf-t0}, frequency: {(tf-t0)/samples}")
-    np.savetxt("data/accelerometer_data.txt",np.asarrays(acceleration))
+    np.savetxt("data/accelerometer_data.txt",np.asarray(acceleration))
 
 if __name__=="__main__":
     read_samples()
