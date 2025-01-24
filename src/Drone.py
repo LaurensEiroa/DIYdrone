@@ -72,7 +72,7 @@ class Drone:
         return np.asarray([-gyro_readings[1],gyro_readings[0],gyro_readings[2]])
     
     def update_orientation(self,rotation_3d_frame):
-        self.angle += rotation_3d_frame-self.initial_angle # TODO += or = ??
+        self.angle = rotation_3d_frame-self.initial_angle # TODO += or = ??
         #print(f"new angle {self.angle}")
 
     def update_heigth(self,h):
