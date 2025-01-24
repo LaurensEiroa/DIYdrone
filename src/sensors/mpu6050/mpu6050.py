@@ -12,7 +12,8 @@ def read_rata(angle=False):
         gyro = mpu.gyro
         t2 = time.time()
         temperature = mpu.temperature
-        return acceleration,float(gyro)*(t2-t1),temperature
+        gyro = (float(gyro[0])*(t2-t1),float(gyro[1])*(t2-t1),float(gyro[2]))*(t2-t1)
+        return acceleration,gyro*(t2-t1),temperature
     t0 = time.time()
     acceleration = mpu.acceleration
     t1 = time.time()
