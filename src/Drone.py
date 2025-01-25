@@ -17,6 +17,7 @@ class Drone:
 
         self.position = np.zeros((3))
         self.angle = np.zeros((3))
+        self.last_3angles = np.zeros((3,3))
         self.initial_position = np.zeros((3))
         self.initial_angle = np.zeros((3))
 
@@ -72,9 +73,12 @@ class Drone:
         return np.asarray([-gyro_readings[1],gyro_readings[0],gyro_readings[2]])
     
     def update_orientation(self,rotation_3d_frame):
-        update = rotation_3d_frame-self.initial_angle
+        last_update = rotation_3d_frame-self.initial_angle
+        self.last_3angles = np.roll(self.last_3angles,shift=1,axis=0)
+        self.last_3angles[0,:] = last_update
+        update = np.mean(self.last_3angles,axis=0)
         print(f"update {update}")
-        cond = np.abs(update)<0.2
+        cond = np.abs(update)<0.1
         if np.any(cond):
             update[cond] = 0
         self.angle += update # TODO += or = ??
