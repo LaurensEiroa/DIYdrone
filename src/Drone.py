@@ -79,6 +79,7 @@ class Drone:
         update = np.mean(self.last_3angles,axis=0)
         cond = np.abs(update)<0.1
         if np.any(cond):
+            print(update)
             update[cond] = 0
         self.angle += update # TODO += or = ??
 
