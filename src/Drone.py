@@ -79,9 +79,11 @@ class Drone:
         update = np.mean(self.last_3angles,axis=0)
         cond = np.abs(update)<0.1
         if np.any(cond):
-            print(update)
+            #print(update)
             update[cond] = 0
-        self.angle += update # TODO += or = ??
+        if np.any(not cond):
+            print(update)
+        self.angle += update 
 
     def update_heigth(self,h):
         self.position[2] = h-self.initial_position[2]
