@@ -81,7 +81,7 @@ class Drone:
         if np.any(cond):
             #print(update)
             update[cond] = 0
-        if np.any(not cond):
+        if np.any(np.abs(update)>=0.1):
             print(update)
         self.angle += update 
 
