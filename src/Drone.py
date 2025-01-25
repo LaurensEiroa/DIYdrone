@@ -9,15 +9,15 @@ from src.sensors.bmp280.bmp280 import read_data as read_bmp
 import asyncio
 
 class Drone:
-    def __init__(self,length_width_height = [90,60,20]):
+    def __init__(self,length_width_height = [90,60,20],window_size=4):
         self.length_width_height = np.asarray(length_width_height)
 
-        self.camera = Camera(resolution=(307,173))
+        #self.camera = Camera(resolution=(307,173))
         self.frame = self.set_frame()
 
         self.position = np.zeros((3))
         self.angle = np.zeros((3))
-        self.last_3angles = np.zeros((3,3))
+        self.last_window_angles = np.zeros((window_size,3))
         self.initial_position = np.zeros((3))
         self.initial_angle = np.zeros((3))
 
@@ -72,16 +72,16 @@ class Drone:
     def drone_coords_to_3d_coords(self, gyro_readings):
         return np.asarray([-gyro_readings[1],gyro_readings[0],gyro_readings[2]])
     
-    def update_orientation(self,rotation_3d_frame):
+    def update_orientation(self,rotation_3d_frame,threshold=0.15):
         last_update = rotation_3d_frame-self.initial_angle
-        self.last_3angles = np.roll(self.last_3angles,shift=1,axis=0)
-        self.last_3angles[0,:] = last_update
-        update = np.mean(self.last_3angles,axis=0)
-        cond = np.abs(update)<0.1
+        self.last_window_angles = np.roll(self.last_window_angles,shift=1,axis=0)
+        self.last_window_angles[0,:] = last_update
+        update = np.mean(self.last_window_angles,axis=0)
+        cond = np.abs(update)<threshold
         if np.any(cond):
             #print(update)
             update[cond] = 0
-        if np.any(np.abs(update)>=0.1):
+        if np.any(np.abs(update)>=threshold):
             print(update)
         self.angle += update 
 
