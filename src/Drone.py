@@ -9,7 +9,7 @@ from src.sensors.bmp280.bmp280 import read_data as read_bmp
 import asyncio
 
 class Drone:
-    def __init__(self,length_width_height = [90,60,20],window_size=1,threshold=0.15):
+    def __init__(self,length_width_height = [90,60,20],window_size=1,threshold=0.0):
         self.threshold = threshold
         self.length_width_height = np.asarray(length_width_height)
 
